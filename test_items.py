@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-@pytest.mark.parametrize('language', ["en", "fr"])
+@pytest.mark.parametrize('language', ["es", "fr"])
 def test_add_to_cart_button(browser):
     
     browser.get("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/")
