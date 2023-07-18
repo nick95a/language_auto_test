@@ -27,24 +27,16 @@ def browser(request):
     browser_language = request.config.getoption('language')
     browser = None
     
+    options.add_experimental_option('prefs', {'intl.accept_languages': browser_language})
+
     if browser_name == 'chrome':
-        browser = webdriver.Chrome()
+        browser = webdriver.Chrome(options = options)
     else:
         browser = None
-        raise Exception("Browser should be chrome")
+        raise pytest.UsageError("browser is not chrome")
     
-    if browser_language == 'es':
-        """es_link = link + browser_language + "/"
-        browser.get(es_link)
-        """
-        options.add_experimental_option('prefs', {'intl.accept_languages': browser_language})
-    elif browser_language == 'fr':
-        fr_link = link + browser_language + "/"
-        browser.get(fr_link)
-        options.add_experimental_option('prefs', {'intl.accept_languages': browser_language})
-    else:
-        browser.get(link)
-
+    browser.get(link)
+    
     yield browser
     browser.quit()
     
